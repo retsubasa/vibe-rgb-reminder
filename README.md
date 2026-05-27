@@ -100,7 +100,7 @@ Each event switches the RGB LED into a persistent visual mode. The current mode 
 
 Color encodes importance:
 
-- Violet: normal or informational.
+- Blue/cyan: normal or idle.
 - Yellow: normal tool activity.
 - Orange: active execution or file mutation.
 - Magenta/white: human intervention required.
@@ -120,8 +120,8 @@ Blink frequency encodes event type:
 
 | Hook event | Extra match | RGB color | Pattern | Meaning |
 | --- | --- | --- | --- | --- |
-| Idle / normal running | no current event | Deep violet -> bright magenta-violet | Stepped color-level breathing, 10 visible steps | System heartbeat, Claude is alive |
-| `SessionStart` | any | Deep violet -> bright magenta-violet | Persistent stepped gradient | Session alive / normal running |
+| Idle / normal running | no current event | Deep blue -> bright cyan | Stepped color-level breathing, 10 visible steps | System heartbeat, Claude is alive |
+| `SessionStart` | any | Deep blue -> bright cyan | Persistent stepped gradient | Session alive / normal running |
 | `UserPromptSubmit` | any | Amber | Persistent double-pulse loop | User intent entered |
 | `PreToolUse` | `tool_name=Bash` | Orange | Persistent triple-spark loop | Shell execution active or pending |
 | `PreToolUse` | `tool_name=Edit` or `Write` | Orange + white | Persistent double-pulse mutation loop | File mutation active or pending |

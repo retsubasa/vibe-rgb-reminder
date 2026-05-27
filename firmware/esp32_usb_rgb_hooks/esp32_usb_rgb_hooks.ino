@@ -45,7 +45,7 @@ void steppedBlueBreath(unsigned long t) {
   uint8_t v = steps[phase];
 
   // Deliberately stepped, not smooth: more visible on tiny onboard RGB LEDs.
-  colorStep(8 + v, 0, 12 + (v / 2));
+  colorStep(0, (v * 2) / 3, 10 + v);
 }
 
 void startupConstellation(unsigned long t) {
