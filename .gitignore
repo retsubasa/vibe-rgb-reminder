@@ -1,0 +1,8 @@
+.DS_Store
+*.bin
+*.elf
+*.map
+*.log
+build/
+dist/
+node_modules/

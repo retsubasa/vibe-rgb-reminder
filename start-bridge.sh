@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+project_dir="$(cd "$(dirname "$0")" && pwd)"
+label="${VIBE_RGB_LAUNCH_LABEL:-com.retsubasa.vibe-rgb-reminder.bridge}"
+launch_agents_dir="${HOME}/Library/LaunchAgents"
+plist="${launch_agents_dir}/${label}.plist"
+uid="$(id -u)"
+node_bin="${NODE_BIN:-$(command -v node)}"
+esp32_port="${ESP32_PORT:-/dev/cu.usbmodem11101}"
+esp32_baud="${ESP32_BAUD:-115200}"
+hook_led_port="${HOOK_LED_PORT:-7317}"
+
+mkdir -p "$launch_agents_dir"
+
+launchctl bootout "gui/${uid}" "$plist" 2>/dev/null || true
+
+cat > "$plist" <<PLIST
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>${label}</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>${node_bin}</string>
+    <string>${project_dir}/host/esp32-usb-led-bridge.mjs</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>${project_dir}</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>ESP32_PORT</key>
+    <string>${esp32_port}</string>
+    <key>ESP32_BAUD</key>
+    <string>${esp32_baud}</string>
+    <key>HOOK_LED_PORT</key>
+    <string>${hook_led_port}</string>
+    <key>PATH</key>
+    <string>/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>KeepAlive</key>
+  <dict>
+    <key>SuccessfulExit</key>
+    <false/>
+  </dict>
+
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
+
+  <key>StandardOutPath</key>
+  <string>/tmp/esp32-usb-led-bridge.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>/tmp/esp32-usb-led-bridge.err.log</string>
+</dict>
+</plist>
+PLIST
+
+launchctl bootstrap "gui/${uid}" "$plist"
+launchctl enable "gui/${uid}/${label}"
+launchctl kickstart -k "gui/${uid}/${label}"
+
+echo "ESP32 USB LED bridge started with LaunchAgent: ${label}"
+echo "Health: http://127.0.0.1:${hook_led_port}/health"
+echo "Log: /tmp/esp32-usb-led-bridge.log"
