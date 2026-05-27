@@ -131,8 +131,10 @@ Blink frequency encodes event type:
 | `StopFailure` | any | Red + white + black | Persistent high-contrast alarm loop | Claude failed to stop cleanly |
 | `PermissionRequest` | any | Magenta + white + black | Persistent rapid strobe | Human intervention required |
 | `Stop` | any | Green | Solid on | Claude finished responding |
-| `PreCompact` | any | White + rose violet | Persistent context-fold loop | Context compaction is starting |
-| `PostCompact` | any | White + rose violet | Persistent context-fold loop | Context compaction completed |
+| `PreCompact` | any | White + rose violet | Sticky persistent context-fold loop | Context compaction is starting |
+| `PostCompact` | any | White + rose violet | Sticky persistent context-fold loop | Context compaction completed |
 | `SessionEnd` | any | Off | Stays off | Session ended |
 | `Notification` | any | Violet | Persistent quick ping loop | Claude Code notification |
 | Other / unknown | any | Dim violet | Persistent tiny glint loop | Unmapped event |
+
+Compact mode is sticky: once `PreCompact` or `PostCompact` is received, normal session/completion events will not override it. It remains visible until the next user prompt, tool activity, permission request, failure, unknown event, or session end.

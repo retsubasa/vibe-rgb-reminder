@@ -181,6 +181,11 @@ String extractJsonString(const String &json, const char *key) {
 }
 
 void showEvent(const String &event, const String &tool) {
+  if (visualMode == VIS_COMPACT &&
+      (event == "SessionStart" || event == "PostToolUse" || event == "Stop" || event == "Notification")) {
+    return;
+  }
+
   if (event == "SessionStart") {
     setMode(VIS_IDLE);
   } else if (event == "UserPromptSubmit") {
