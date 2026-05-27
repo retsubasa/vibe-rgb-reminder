@@ -122,6 +122,7 @@ Blink frequency encodes event type:
 | --- | --- | --- | --- | --- |
 | Idle / normal running | no current event | Deep blue -> bright cyan | Stepped color-level breathing, 10 visible steps | System heartbeat, Claude is alive |
 | `SessionStart` | any | Deep blue -> bright cyan | Persistent stepped gradient | Session alive / normal running |
+| `InstructionsLoaded` | any | Deep blue -> bright cyan | Persistent stepped gradient | Instructions, skills, or agents loaded |
 | `UserPromptSubmit` | any | Amber | Persistent double-pulse loop | User intent entered |
 | `PreToolUse` | `tool_name=Bash` | Orange | Persistent triple-spark loop | Shell execution active or pending |
 | `PreToolUse` | `tool_name=Edit` or `Write` | Orange + white | Persistent double-pulse mutation loop | File mutation active or pending |

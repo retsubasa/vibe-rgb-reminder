@@ -186,7 +186,7 @@ void showEvent(const String &event, const String &tool) {
     return;
   }
 
-  if (event == "SessionStart") {
+  if (event == "SessionStart" || event == "InstructionsLoaded") {
     setMode(VIS_IDLE);
   } else if (event == "UserPromptSubmit") {
     setMode(VIS_PROMPT);

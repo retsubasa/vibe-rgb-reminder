@@ -121,6 +121,7 @@ Claude Code 全局配置已经写入：
 
 ```text
 SessionStart
+InstructionsLoaded
 UserPromptSubmit
 PreToolUse
 PostToolUse
@@ -200,6 +201,7 @@ Stop
 | --- | --- | --- | --- | --- |
 | 空闲 / 正常运行 | 无事件 | 深蓝 -> 亮青 | 10 阶色阶渐变 | 系统心跳，表示会话活着 |
 | `SessionStart` | 任意 | 深蓝 -> 亮青 | 持续色阶渐变 | 会话开始 / 正常运行 |
+| `InstructionsLoaded` | 任意 | 深蓝 -> 亮青 | 持续色阶渐变 | 指令、skills 或 agents 已加载 |
 | `UserPromptSubmit` | 任意 | 琥珀色 | 持续双脉冲 | 用户输入进入系统 |
 | `PreToolUse` | `Bash` / `exec_command` | 橙色 | 持续三连火花 | shell 命令即将执行或正在执行 |
 | `PreToolUse` | `Edit` / `Write` / `apply_patch` | 橙色 + 白色 | 持续双脉冲 | 文件修改即将发生或正在发生 |
