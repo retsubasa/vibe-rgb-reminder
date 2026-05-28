@@ -209,6 +209,7 @@ Stop
 | `PostToolUse` | 任意 | 绿色 | 闪三下，然后回到正常紫罗兰色阶 | 上一个工具成功完成 |
 | `PostToolUseFailure` | 任意 | 红 + 白 + 黑 | 持续高对比警报 | 工具失败 |
 | `StopFailure` | 任意 | 红 + 白 + 黑 | 持续高对比警报 | Claude 停止失败 |
+| Codex 重连 / 上游流失败 | hook payload 里出现 `Reconnecting...`、`stream disconnected before completion` 或 `Upstream request failed` | 红 + 白 + 黑 | 持续高对比警报 | Codex 网络流失败，正在重连或重试 |
 | `PermissionRequest` | 任意 | 品红 + 白 + 黑 | 持续快速频闪 | 需要人为介入 / 授权 |
 | `Stop` | 任意 | 绿色 | 常亮 | 回复完成 |
 | `PreCompact` | 任意 | 白 + 玫紫 | 粘性持续上下文折叠循环 | 即将压缩上下文 |

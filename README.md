@@ -130,6 +130,7 @@ Blink frequency encodes event type:
 | `PostToolUse` | any | Green | Three flashes, then return to normal stepped gradient | Last tool completed successfully |
 | `PostToolUseFailure` | any | Red + white + black | Persistent high-contrast alarm loop | Last tool failed |
 | `StopFailure` | any | Red + white + black | Persistent high-contrast alarm loop | Claude failed to stop cleanly |
+| Codex reconnect / upstream stream failure | `Reconnecting...`, `stream disconnected before completion`, or `Upstream request failed` in hook payload | Red + white + black | Persistent high-contrast alarm loop | Codex network stream failed and is retrying |
 | `PermissionRequest` | any | Magenta + white + black | Persistent rapid strobe | Human intervention required |
 | `Stop` | any | Green | Solid on | Claude finished responding |
 | `PreCompact` | any | White + rose violet | Sticky persistent context-fold loop | Context compaction is starting |
