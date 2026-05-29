@@ -44,6 +44,7 @@ Or use the Arduino CLI bundled with Arduino IDE:
 ## Run The USB Bridge
 
 The bridge is installed as a macOS LaunchAgent and starts automatically when you log in.
+`start-bridge.sh` unloads the old LaunchAgent first and cleans up stale bridge processes on port `7317`.
 
 ```bash
 ./start-bridge.sh
@@ -61,6 +62,14 @@ Stop it with:
 
 ```bash
 ./stop-bridge.sh
+```
+
+Logs:
+
+```text
+/tmp/esp32-usb-led-bridge.log
+/tmp/esp32-usb-led-bridge.err.log
+/tmp/vibe-rgb-claude-hook.log
 ```
 
 Disable auto-start by unloading the LaunchAgent and removing the plist:

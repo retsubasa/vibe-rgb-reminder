@@ -104,6 +104,16 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
+server.on("error", (error) => {
+  if (error.code === "EADDRINUSE") {
+    console.error(`[bridge] port ${httpPort} is already in use; another bridge may already be running`);
+    process.exit(0);
+  }
+
+  console.error("[bridge] server failed:", error.message);
+  process.exit(1);
+});
+
 server.listen(httpPort, "127.0.0.1", () => {
   console.log(`[bridge] listening on http://127.0.0.1:${httpPort}`);
   console.log(`[bridge] writing events to ${serialPath} at ${baudRate} baud`);

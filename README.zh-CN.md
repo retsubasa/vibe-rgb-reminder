@@ -82,7 +82,10 @@ curl http://127.0.0.1:7317/health
 ```text
 /tmp/esp32-usb-led-bridge.log
 /tmp/esp32-usb-led-bridge.err.log
+/tmp/vibe-rgb-claude-hook.log
 ```
+
+`start-bridge.sh` 会先卸载旧 LaunchAgent，并清理仍占用 `7317` 的旧 bridge 进程，避免重启后出现重复服务。
 
 如果要禁用开机自启：
 
